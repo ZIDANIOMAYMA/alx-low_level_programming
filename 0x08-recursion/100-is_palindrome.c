@@ -1,32 +1,39 @@
 #include "main.h"
-
-int actual_prime(int n, int i);
-
 /**
- * is_prime_number - says if an integer is a prime number or not
- * @n: number to evaluate
- *
- * Return: 1 if n is a prime number, 0 if not
+ * _strlen_recursion - Prints the length of a string.
+ * @s: the string to be printed
+ * Return: the length of string
  */
-int is_prime_number(int n)
+int _strlen_recursion(char *s)
 {
-	if (n <= 1)
-		return (0);
-	return (actual_prime(n, n - 1));
+	if (s[0] != '\0')
+		return (1 + _strlen_recursion(s + 1));
+	return (0);
 }
-
 /**
- * actual_prime - calculates if a number is prime recursively
- * @n: number to evaluate
- * @i: iterator
- *
- * Return: 1 if n is prime, 0 if not
+ * pal_checker - check if s is palindrome.
+ * @s: string base address.
+ * @i: left index.
+ * @j: rigth index.
+ * Return: 1 if s is palindrome, 0 otherwise.
  */
-int actual_prime(int n, int i)
+int pal_checker(char *s, int i, int j)
 {
-	if (i == 1)
-		return (1);
-	if (n % i == 0 && i > 0)
+	if (s[i] == s[j])
+		if (i > j / 2)
+			return (1);
+		else
+			return (pal_checker(s, i + 1, j - 1));
+	else
 		return (0);
-	return (actual_prime(n, i - 1));
+}
+/**
+ * is_palindrome - check if s is palindrome
+ * @s: base address for string.
+ *
+ * Return: 1 if n is prime, 0 otherwise.
+ */
+int is_palindrome(char *s)
+{
+	return (pal_checker(s, 0, _strlen_recursion(s) - 1));
 }
